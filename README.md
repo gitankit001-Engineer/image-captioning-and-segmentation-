@@ -1,4 +1,4 @@
-# image-captioning-and-segmentation-
+# image-captioning-and-segmentation with VOC2012-
 📚 Image Captioning Project – Requirements
 ✅ Python Version:
 
