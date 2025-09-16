@@ -1,16 +1,25 @@
 import os
-import xml.etree.ElementTree as ET
+import random
 
-ANNOTATIONS_FOLDER = r"D:\image captioning- CNN (ANKIT)\dataset\archive\VOC2012_train_val\Annotations"
-OUTPUT_FILE = r"D:\image captioning- CNN (ANKIT)\dataset\archive\captions.txt"
+# Example folder path where images are
+images_dir = 'D:/image captioning- CNN (ANKIT)/dataset/archive/VOC2012_train_val/JPEGImages/'
 
-with open(OUTPUT_FILE, 'w', encoding='utf-8') as f_out:
-    for xml_file in os.listdir(ANNOTATIONS_FOLDER):
-        if not xml_file.endswith('.xml'):
-            continue
-        img_id = os.path.splitext(xml_file)[0]
-        tree = ET.parse(os.path.join(ANNOTATIONS_FOLDER, xml_file))
-        root = tree.getroot()
-        objects = [obj.find('name').text for obj in root.findall('object')]
-        caption = ' '.join(objects) + ' endseq'  # 'endseq' for LSTM sequence end
-        f_out.write(f"{img_id}\t{caption}\n")
+# Output captions.txt file
+output_file = 'D:/image captioning- CNN (ANKIT)/dataset/archive/captions.txt'
+
+# Dummy captions (you can modify these as per real captions)
+dummy_captions = [
+    "startseq a man riding a horse on the beach endseq",
+    "startseq a dog playing with a ball endseq",
+    "startseq a person holding an umbrella in the rain endseq"
+]
+
+# Get list of image files
+image_files = [f for f in os.listdir(images_dir) if f.endswith('.jpg')]
+
+with open(output_file, 'w', encoding='utf-8') as f:
+    for img_file in image_files:
+        caption = random.choice(dummy_captions)
+        f.write(f"{img_file}\t{caption}\n")
+
+print(f"✅ captions.txt created with {len(image_files)} lines")
